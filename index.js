@@ -3,7 +3,7 @@ const casoServiceCloud = {
     casoId: "CASO-88421",
     cliente: "Monalisa",
     telefone: "+55 (41) 99999-9999",
-    status: "Fechado",
+    status: "Em Andamento",
     assunto: "Dúvida sobre integração e canais de atendimento"
 };
 
@@ -13,14 +13,19 @@ console.log(` O Caso ${casoServiceCloud.casoId} do cliente ${casoServiceCloud.cl
 console.log("----------------------------------------------------");
 
 // Função que simula o disparo da Notificação / SMS / Push
-function enviarNotificacao(canal, mensagem) {
+function enviarNotificacao(canal) {
+    let mensagem;
+
+    if (casoServiceCloud.status === "Fechado") {
+        mensagem = `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) foi resolvido. Avalie nosso atendimento!`;
+    } else {
+        mensagem = `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) está em atendimento e nossa equipe já está analisando!`;
+    }
+
     console.log(`\n Disparando ${canal} para o número ${casoServiceCloud.telefone}...`);
     console.log(` Mensagem: "${mensagem}"`);
     console.log(` Status: [ENTREGUE COM SUCESSO] 🚀\n`);
 }
 
-// Simulando o envio de um SMS de pós-atendimento
-enviarNotificacao(
-    "SMS", 
-    `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) foi resolvido. Avalie nosso atendimento!`
-);
+// Executa a função
+enviarNotificacao("SMS");
