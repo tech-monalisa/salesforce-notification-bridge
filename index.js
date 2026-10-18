@@ -1,23 +1,22 @@
-// Simulação de um evento do Salesforce Service Cloud (Ex: Caso fechado)
+// Dados simulados do Salesforce
 const casoServiceCloud = {
     casoId: "CASO-88421",
     cliente: "Monalisa",
     telefone: "+55 (41) 99999-9999",
-    status: "Em Andamento",
-    assunto: "Dúvida sobre integração e canais de atendimento"
+    status: "Fechado"
 };
 
-console.log("----------------------------------------------------");
+console.log("--------------------------------------------------");
 console.log(" [Salesforce Service Cloud] Evento Detectado:");
 console.log(` O Caso ${casoServiceCloud.casoId} do cliente ${casoServiceCloud.cliente} foi atualizado para: ${casoServiceCloud.status}`);
-console.log("----------------------------------------------------");
+console.log("--------------------------------------------------");
 
-// Função que simula o disparo da Notificação / SMS / Push
+// Função que simula o disparo da Notificação
 function enviarNotificacao(canal) {
-    let mensagem;
+    let mensagem = "";
 
     if (casoServiceCloud.status === "Fechado") {
-        mensagem = `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) foi resolvido. Avalie nosso atendimento!`;
+        mensagem = `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) foi resolvido com sucesso!`;
     } else {
         mensagem = `Olá ${casoServiceCloud.cliente}, seu chamado (${casoServiceCloud.casoId}) está em atendimento e nossa equipe já está analisando!`;
     }
@@ -27,5 +26,6 @@ function enviarNotificacao(canal) {
     console.log(` Status: [ENTREGUE COM SUCESSO] 🚀\n`);
 }
 
-// Executa a função
+// Testa os dois canais
 enviarNotificacao("SMS");
+enviarNotificacao("WhatsApp");
